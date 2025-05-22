@@ -10,13 +10,13 @@ namespace WebApplication1.Controllers;
 public class PatientController(IDbService service) :ControllerBase
 {
 
-    [HttpGet]
+    [HttpGet]//http://localhost:5097/patient
     public async Task<IActionResult> GetPatientDetails()
     {
         return Ok(await service.GetPatientDetailsAsync());
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}")] //http://localhost:5097/patient/1
     public async Task<IActionResult> GetPatientById(int id)
     {
         var patient = await service.GetPatientByIdAsync(id);
@@ -34,13 +34,35 @@ public class PatientController(IDbService service) :ControllerBase
         try
         {
             await service.AddPrescriptionAsync(reqDto);
-            return Created("udalo sie",null);
+            return Created("",null);
+            
         }
         catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
+    //testowy POST - nowy pacjent
+    /*{
+        "patient": {
+            "idPatient": 0,
+            "firstName": "Jan",
+            "lastName": "fajny",
+            "birthdate": "1980-05-12"
+        },
+        "medicaments": [
+        {
+            "idMedicament": 1,
+            "dose": 3,
+            "description": "Podawac po kazdym posilku"
+        }
+        ],
+        "date": "2024-01-01",
+        "dueDate": "2024-02-01",
+        "idDoctor": 1
+    }
+    */
+    
 
 }
 
