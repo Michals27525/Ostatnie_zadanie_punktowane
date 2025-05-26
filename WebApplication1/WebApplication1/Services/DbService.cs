@@ -43,8 +43,13 @@ public class DbService(AppDbContext data):IDbService
             IdPatient = p.IdPatient,
             FirstName = p.FirstName,
             LastName = p.LastName,
-            Birthdate = p.Birthdate
-            
+            Birthdate = p.Birthdate,
+            Prescriptions = p.Prescriptions.Select(pr=>new PrescriptionDto
+            {
+                IdPrescription = pr.IdPrescription,
+                Date = pr.Date,
+                DueDate = pr.DueDate
+            }).ToList()
         }).ToListAsync();
     }
 
