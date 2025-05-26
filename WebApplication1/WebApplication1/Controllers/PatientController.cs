@@ -28,7 +28,7 @@ public class PatientController(IDbService service) :ControllerBase
         return Ok(patient);
     }
 
-    [HttpPost]
+    [HttpPost]//http://localhost:5097/patient
     public async Task<IActionResult> AddPrescription([FromBody] PrescriptionCreateReqDto reqDto)
     {
         try
